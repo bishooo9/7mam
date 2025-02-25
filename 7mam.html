@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toilet Queue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #queue {
+            list-style-type: none;
+            padding: 0;
+        }
+        #queue li {
+            background: #f4f4f4;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Toilet Queue</h1>
+    <input type="text" id="name" placeholder="Enter your name">
+    <button onclick="joinQueue()">Join Queue</button>
+    <ul id="queue"></ul>
+    <button onclick="nextPerson()">Next</button>
+
+    <script>
+        let queue = [];
+        function joinQueue() {
+            let name = document.getElementById("name").value;
+            if (name.trim() !== "") {
+                queue.push(name);
+                document.getElementById("name").value = "";
+                updateQueue();
+            }
+        }
+        function nextPerson() {
+            if (queue.length > 0) {
+                queue.shift();
+                updateQueue();
+            }
+        }
+        function updateQueue() {
+            let queueList = document.getElementById("queue");
+            queueList.innerHTML = "";
+            queue.forEach((person, index) => {
+                let li = document.createElement("li");
+                li.textContent = `${index + 1}. ${person}`;
+                queueList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
